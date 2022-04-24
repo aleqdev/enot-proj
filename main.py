@@ -1,3 +1,4 @@
+import stage
 
 def main():
     pass
