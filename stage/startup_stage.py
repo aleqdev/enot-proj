@@ -24,10 +24,10 @@ class StartupStage(abstract_stage.Stage):
         
     async def display(self):
         name = input("Введите своё имя :: ")
-        print(f"\rВведённое имя: {colorama.GREEN}{name}")
+        print(f"\rВведённое имя: {colorama.Fore.GREEN}{name}{colorama.Style.RESET_ALL}")
 
         print(f"""
-        Доступные роли:""")
+Доступные роли:""")
         print(''.join(f'\n {i}) {name}' for i, name in enumerate(config.ROLES_NAMES)))
 
         role = None
@@ -40,10 +40,10 @@ class StartupStage(abstract_stage.Stage):
             finally:
                 print("Введите число от 0 до 4")
 
-        print(f"\Ваша роль: \033[96m{config.ROLES_NAMES[role]}")
+        print(f"\Ваша роль: {colorama.Fore.GREEN}{config.ROLES_NAMES[role]}{colorama.Style.RESET_ALL}")
 
         name = input("Введите своё имя :: ")
-        print(f"\rВведённое имя: \033[96m{name}")
+        print(f"\rВведённое имя: {colorama.Fore.GREEN}{name}{colorama.Style.RESET_ALL}")
 
 
 

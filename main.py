@@ -1,8 +1,10 @@
 import stage
 import config
 import asyncio
+import colorama
 
 async def main():
+    colorama.init()
     s = await stage.StartupStage.new(config)
     while True:
         await s.start()
