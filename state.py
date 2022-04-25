@@ -1,22 +1,38 @@
 from dataclasses import dataclass
+import json
 import websockets
-import curses
 import enum
+import json
 
 class MemberRole(enum.Enum):
-    CAPTAIN = 0
-    MEDIC = 1
-    TECH = 2
-    PILOT = 3
-    IMP = 4
+    CAPTAIN = "cap"
+    MEDIC = "med"
+    TECH = "tec"
+    PILOT = "pil"
+    IMP = "imp"
 
 
 @dataclass
 class State:
     config: dict
     socket: websockets
-    scr: curses.window
 
     name: str
     role: MemberRole
+    group: str
+
+    async def wssend(self, cmd, cmd_d=None):
+        if cmd_d is None:
+            cmd_d = {}
+
+        await self.socket.send(
+            json.dumps(
+                {"session":"123456",
+                 "cmd":cmd,
+                 "cmd-d":cmd_d},
+                default=vars
+            )
+        )
+
+        return await self.socket.recv()
     
